@@ -1506,7 +1506,9 @@
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     const key = isDark ? 'theme_toggle_light' : 'theme_toggle';
     if (!themeToggle) return;
-    themeToggle.textContent = translations[lang]?.[key] || translations.fr[key] || themeToggle.textContent;
+    const label = translations[lang]?.[key] || translations.fr[key];
+    themeToggle.setAttribute('aria-label', label);
+    themeToggle.title = label;
   }
 
   function translatePage(lang) {
@@ -1529,7 +1531,6 @@
     translatePage(lang);
     localStorage.setItem('language', lang);
     if (langToggleBtn) {
-      langToggleBtn.textContent = lang.toUpperCase();
       langToggleBtn.setAttribute('aria-expanded', 'false');
     }
     if (langMenu) {
